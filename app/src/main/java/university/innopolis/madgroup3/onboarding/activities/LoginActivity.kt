@@ -2,6 +2,7 @@ package university.innopolis.madgroup3.onboarding.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import university.innopolis.madgroup3.onboarding.R
 
 class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
