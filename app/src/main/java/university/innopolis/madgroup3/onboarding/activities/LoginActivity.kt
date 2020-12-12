@@ -23,6 +23,8 @@ class LoginActivity : AppCompatActivity() {
                 errorToast.show()
             } else {
                 // TODO: API call with inputEmail and inputPw
+                // TODO: Fire an Intent after successful completion
+                // TODO: Fire a Toast on unsuccessful completion (error)
             }
         }
     }
