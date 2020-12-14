@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">On-Boarding</string>
+    <string name="onboarding_app">Onboarding App</string>
+    <string name="log_in_using_credentials">Log in using your credentials</string>
+    <string name="log_in">Log in</string>
+    <string name="example_credentials">user@company.com</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
 </resources>

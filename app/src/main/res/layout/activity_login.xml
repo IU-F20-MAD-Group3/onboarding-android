@@ -1,9 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activities.LoginActivity">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/app_logo_foreground" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/onboarding_app"
+            android:textSize="@dimen/text_title"
+            android:textAlignment="center"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/log_in_using_credentials"
+            android:textSize="@dimen/text_subtitle"
+            android:textAlignment="center" />
+
+        <EditText
+            android:id="@+id/login_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            android:hint="@string/email"
+            android:importantForAutofill="no"
+            android:minWidth="205sp"
+            android:layout_marginTop="@dimen/mid_margin" />
+
+        <EditText
+            android:id="@+id/login_pw"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:hint="@string/password"
+            android:importantForAutofill="no"
+            android:minWidth="205sp"
+            android:layout_marginTop="@dimen/min_margin" />
+
+        <Button
+            android:id="@+id/login_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/log_in"
+            android:minWidth="205sp"
+            android:layout_marginTop="@dimen/min_margin"
+            android:backgroundTint="@color/logo_green" />
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
