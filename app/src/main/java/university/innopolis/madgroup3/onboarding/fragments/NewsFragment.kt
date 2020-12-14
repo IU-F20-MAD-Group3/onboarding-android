@@ -39,8 +39,6 @@ class NewsFragment : Fragment() {
         fragment_news_recycler.adapter = adapter
 
         val news = newsRepository.getAllNews()
-        // TODO: delete logs
-        println(news.toString())
         if (news != null) {
             (fragment_news_recycler.adapter as NewsItemAdapter).setNewsList(news)
         } else {
