@@ -40,7 +40,6 @@ class LoginActivity : AppCompatActivity() {
 
         setResult(RESULT_OK)
         finish()
-
     }
 
     private fun showToast(message: String) {
