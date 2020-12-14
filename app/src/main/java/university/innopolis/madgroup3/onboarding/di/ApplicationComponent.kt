@@ -1,6 +1,5 @@
 package university.innopolis.madgroup3.onboarding.di
 
-import androidx.fragment.app.Fragment
 import dagger.Component
 import university.innopolis.madgroup3.onboarding.activities.CaptionActivity
 import university.innopolis.madgroup3.onboarding.activities.LoginActivity

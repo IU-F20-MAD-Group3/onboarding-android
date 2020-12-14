@@ -17,10 +17,10 @@ class LoginActivity : AppCompatActivity() {
     lateinit var tokenRepository: TokenRepository
 
     private val mOnClickListener = View.OnClickListener {
-        val inputEmail = login_email.text.toString()
+        val inputUsername = login_username.text.toString()
         val inputPw = login_pw.text.toString()
 
-        val errorText = validateCredentials(inputEmail, inputPw)
+        val errorText = validateCredentials(inputUsername, inputPw)
 
         if (!errorText.isNullOrBlank()) {
             val errorToast = Toast.makeText(applicationContext, errorText, Toast.LENGTH_SHORT)
@@ -29,7 +29,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
         login_btn.isEnabled = false
-        val token = tokenRepository.requestToken(inputEmail, inputPw)
+        val token = tokenRepository.requestToken(inputUsername, inputPw)
         login_btn.isEnabled = true
 
         if (token == null) {
@@ -59,13 +59,13 @@ class LoginActivity : AppCompatActivity() {
         login_btn.setOnClickListener(mOnClickListener)
     }
 
-    private fun validateCredentials(email: String, pw: String): String? {
-        if (TextUtils.isEmpty(email) || TextUtils.isEmpty(pw)) {
+    private fun validateCredentials(username: String, pw: String): String? {
+        if (TextUtils.isEmpty(username) || TextUtils.isEmpty(pw)) {
             return ENTER_CREDENTIALS
         }
 
-        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            return VALID_EMAIL
+        if (username.length < 4) {
+            return VALID_USERNAME
         }
 
         if (pw.length < 6) {
@@ -77,7 +77,7 @@ class LoginActivity : AppCompatActivity() {
 
     companion object {
         const val ENTER_CREDENTIALS = "Please enter your credentials."
-        const val VALID_EMAIL = "Please enter a valid e-mail address."
+        const val VALID_USERNAME = "Please enter a valid username."
         const val SHORT_PW = "Please enter a password with more than 6 characters."
 
         const val REQUEST_CODE = 1337
