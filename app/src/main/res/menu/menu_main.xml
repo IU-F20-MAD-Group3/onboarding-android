@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/action_tasks"
+        android:icon="@drawable/ic_baseline_library_add_check_24"
+        android:title="@string/tasks" />
+    <item
+        android:id="@+id/action_checklists"
+        android:icon="@drawable/ic_baseline_list_alt_24"
+        android:title="@string/checklists" />
+    <item
+        android:id="@+id/action_news"
+        android:icon="@drawable/ic_baseline_dashboard_24"
+        android:title="@string/news" />
+
+</menu>

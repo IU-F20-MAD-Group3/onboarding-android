@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">On-Boarding</string>
+    <string name="tasks">Tasks</string>
+    <string name="checklists">Checklists</string>
+    <string name="news">News</string>
     <string name="onboarding_app">Onboarding App</string>
     <string name="log_in_using_credentials">Log in using your credentials</string>
     <string name="log_in">Log in</string>
