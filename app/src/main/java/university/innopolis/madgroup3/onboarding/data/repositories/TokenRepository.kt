@@ -5,6 +5,7 @@ import android.util.Log
 import io.reactivex.schedulers.Schedulers
 import university.innopolis.madgroup3.onboarding.data.models.Token
 import university.innopolis.madgroup3.onboarding.network.requests.TokenRequest
+import university.innopolis.madgroup3.onboarding.network.responses.TokenResponse
 import university.innopolis.madgroup3.onboarding.network.services.OnboardingAuthService
 import javax.inject.Inject
 import javax.inject.Named
@@ -37,14 +38,15 @@ class TokenRepository @Inject constructor(
     fun requestToken(username: String, password: String): Token? {
         val request = TokenRequest(username, password)
 
-        val token: Token? = authService.getAuthToken(request)
+        val tokenResponse: TokenResponse = authService.getAuthToken(request)
             .subscribeOn(Schedulers.io())
+            .map { TokenResponse(it, null) }
             .onErrorReturn {
                 Log.e("TokenRepository", it.message ?: "")
-                null
+                TokenResponse(null, it)
             }
             .blockingGet()
-
+        val token = tokenResponse.token
         if (token != null) saveToken(token)
 
         return token

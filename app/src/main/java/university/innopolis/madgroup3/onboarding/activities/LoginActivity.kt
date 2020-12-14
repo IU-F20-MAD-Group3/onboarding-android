@@ -1,9 +1,10 @@
 package university.innopolis.madgroup3.onboarding.activities
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
+import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_login.*
 import university.innopolis.madgroup3.onboarding.OnboardingApplication
 import university.innopolis.madgroup3.onboarding.R
@@ -12,32 +13,50 @@ import javax.inject.Inject
 
 class LoginActivity : AppCompatActivity() {
 
-    @Inject lateinit var tokenRepository: TokenRepository
+    @Inject
+    lateinit var tokenRepository: TokenRepository
+
+    private val mOnClickListener = View.OnClickListener {
+        val inputUsername = login_username.text.toString()
+        val inputPw = login_pw.text.toString()
+
+        val errorText = validateCredentials(inputUsername, inputPw)
+
+        if (!errorText.isNullOrBlank()) {
+            val errorToast = Toast.makeText(applicationContext, errorText, Toast.LENGTH_SHORT)
+            errorToast.show()
+            return@OnClickListener
+        }
+
+        login_btn.isEnabled = false
+        val token = tokenRepository.requestToken(inputUsername, inputPw)
+        login_btn.isEnabled = true
+
+        if (token == null) {
+            showToast("Failed logging in, try again or contact your admin")
+            login_pw.setText("")
+            return@OnClickListener
+        }
+
+        setResult(RESULT_OK)
+        finish()
+    }
+
+    private fun showToast(message: String) {
+        Toast.makeText(
+            this,
+            message,
+            Toast.LENGTH_SHORT,
+        ).show()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        (applicationContext as OnboardingApplication).appComponent.inject(this)
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        (applicationContext as OnboardingApplication).appComponent.inject(this)
-
-        login_btn.setOnClickListener {
-            val inputUsername = login_username.text.toString()
-            val inputPw = login_pw.text.toString()
-
-            val errorText = validateCredentials(inputUsername, inputPw)
-            if (!errorText.isNullOrBlank()) {
-                val errorToast = Toast.makeText(applicationContext, errorText, Toast.LENGTH_SHORT)
-                errorToast.show()
-            } else {
-                val token = tokenRepository.requestToken(inputUsername, inputPw)
-                token ?: showTokenFailToast()
-
-                // TODO: go back to CaptionActivity that decides to proceed to main app
-                // That is, just uncomment next two lines
-                // setResult(RESULT_OK)
-                // finish()
-            }
-        }
+        login_btn.setOnClickListener(mOnClickListener)
     }
 
     private fun validateCredentials(username: String, pw: String): String? {
@@ -56,17 +75,11 @@ class LoginActivity : AppCompatActivity() {
         return null
     }
 
-    private fun showTokenFailToast() {
-        Toast.makeText(
-            this,
-            "Failed fetching a token",
-            Toast.LENGTH_SHORT,
-        ).show()
-    }
-
     companion object {
         const val ENTER_CREDENTIALS = "Please enter your credentials."
         const val VALID_USERNAME = "Please enter a valid username."
         const val SHORT_PW = "Please enter a password with more than 6 characters."
+
+        const val REQUEST_CODE = 1337
     }
 }
