@@ -42,7 +42,7 @@ class NewsFragment : Fragment() {
         if (news != null) {
             (fragment_news_recycler.adapter as NewsItemAdapter).setNewsList(news)
         } else {
-            // TODO: handle null news response
+            showToast()
         }
 
         fragment_news_swipe.setOnRefreshListener {
@@ -51,10 +51,19 @@ class NewsFragment : Fragment() {
             if (newNews != null) {
                 (fragment_news_recycler.adapter as NewsItemAdapter).setNewsList(newNews)
             } else {
-                // TODO: handle null news response
+                showToast()
             }
             fragment_news_swipe.isRefreshing = false
         }
+    }
+
+    private fun showToast() {
+        val message = "Unable to fetch latest news. Please try again or contact the admin"
+        Toast.makeText(
+            activity,
+            message,
+            Toast.LENGTH_SHORT,
+        ).show()
     }
 
     companion object {
