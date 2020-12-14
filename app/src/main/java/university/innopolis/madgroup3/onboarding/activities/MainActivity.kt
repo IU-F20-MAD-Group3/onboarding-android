@@ -6,12 +6,17 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
+import university.innopolis.madgroup3.onboarding.OnboardingApplication
 import university.innopolis.madgroup3.onboarding.R
+import university.innopolis.madgroup3.onboarding.data.repositories.ChecklistRepository
 import university.innopolis.madgroup3.onboarding.fragments.ChecklistsFragment
 import university.innopolis.madgroup3.onboarding.fragments.NewsFragment
 import university.innopolis.madgroup3.onboarding.fragments.TasksFragment
+import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
+
+    @Inject lateinit var checklistRepository: ChecklistRepository
 
     private lateinit var mTasksFragment: TasksFragment
     private lateinit var mChecklistsFragment: ChecklistsFragment
@@ -54,6 +59,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        (applicationContext as OnboardingApplication).appComponent.inject(this)
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(main_toolbar)

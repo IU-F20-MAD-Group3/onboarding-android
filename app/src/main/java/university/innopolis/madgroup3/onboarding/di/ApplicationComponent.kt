@@ -3,6 +3,7 @@ package university.innopolis.madgroup3.onboarding.di
 import dagger.Component
 import university.innopolis.madgroup3.onboarding.activities.CaptionActivity
 import university.innopolis.madgroup3.onboarding.activities.LoginActivity
+import university.innopolis.madgroup3.onboarding.activities.MainActivity
 import javax.inject.Singleton
 
 /**
@@ -14,9 +15,11 @@ import javax.inject.Singleton
         ApplicationModule::class,
         NetworkModule::class,
         SecureSharedPreferencesModule::class,
+        RoomModule::class,
     ]
 )
 interface ApplicationComponent {
     fun inject(activity: CaptionActivity)
     fun inject(activity: LoginActivity)
+    fun inject(activity: MainActivity)
 }
