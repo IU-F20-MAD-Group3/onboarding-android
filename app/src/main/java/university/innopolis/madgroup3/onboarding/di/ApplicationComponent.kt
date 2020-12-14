@@ -2,6 +2,7 @@ package university.innopolis.madgroup3.onboarding.di
 
 import dagger.Component
 import university.innopolis.madgroup3.onboarding.activities.CaptionActivity
+import university.innopolis.madgroup3.onboarding.activities.LoginActivity
 import javax.inject.Singleton
 
 /**
@@ -17,4 +18,5 @@ import javax.inject.Singleton
 )
 interface ApplicationComponent {
     fun inject(activity: CaptionActivity)
+    fun inject(activity: LoginActivity)
 }
