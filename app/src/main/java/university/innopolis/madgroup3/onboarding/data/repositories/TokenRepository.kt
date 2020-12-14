@@ -35,6 +35,10 @@ class TokenRepository @Inject constructor(
         return Token(tokenStr)
     }
 
+    fun deleteToken() {
+        secureSharedPreferences.edit().remove(AUTH_TOKEN_KEY).apply()
+    }
+
     fun requestToken(username: String, password: String): Token? {
         val request = TokenRequest(username, password)
 
