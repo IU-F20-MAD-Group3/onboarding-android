@@ -1,28 +1,13 @@
 package university.innopolis.madgroup3.onboarding.activities
 
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.security.crypto.EncryptedSharedPreferences
-import androidx.security.crypto.MasterKey
-import io.reactivex.schedulers.Schedulers
-import okhttp3.OkHttpClient
-import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
-import retrofit2.converter.gson.GsonConverterFactory
 import university.innopolis.madgroup3.onboarding.OnboardingApplication
 import university.innopolis.madgroup3.onboarding.R
-import university.innopolis.madgroup3.onboarding.data.models.Checklist
-import university.innopolis.madgroup3.onboarding.data.models.Token
-import university.innopolis.madgroup3.onboarding.network.interceptors.AuthInterceptor
-import university.innopolis.madgroup3.onboarding.network.requests.TokenRequest
-import university.innopolis.madgroup3.onboarding.network.services.OnboardingAuthService
-import university.innopolis.madgroup3.onboarding.network.services.OnboardingDataService
 import university.innopolis.madgroup3.onboarding.data.repositories.ChecklistRepository
 import university.innopolis.madgroup3.onboarding.data.repositories.TokenRepository
-import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 class CaptionActivity : AppCompatActivity() {
@@ -41,8 +26,8 @@ class CaptionActivity : AppCompatActivity() {
     }
 
     private fun testAPI() {
-        val username = ""
-        val password = ""
+        val username = "root"
+        val password = "dnNeZHZediYrY28oNnkoMmRqJXJla"
 
         val token = tokenRepository.requestToken(username, password)
         token ?: return showTokenFailToast()
