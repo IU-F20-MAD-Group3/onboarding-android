@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_login.*
+import university.innopolis.madgroup3.onboarding.OnboardingApplication
 import university.innopolis.madgroup3.onboarding.R
 import university.innopolis.madgroup3.onboarding.data.repositories.TokenRepository
 import javax.inject.Inject
@@ -16,6 +17,8 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+
+        (applicationContext as OnboardingApplication).appComponent.inject(this)
 
         login_btn.setOnClickListener {
             val inputUsername = login_username.text.toString()
@@ -29,9 +32,10 @@ class LoginActivity : AppCompatActivity() {
                 val token = tokenRepository.requestToken(inputUsername, inputPw)
                 token ?: showTokenFailToast()
 
-                // go back to CaptionActivity that decides to proceed to main app
-                setResult(RESULT_OK)
-                finish()
+                // TODO: go back to CaptionActivity that decides to proceed to main app
+                // That is, just uncomment next two lines
+                // setResult(RESULT_OK)
+                // finish()
             }
         }
     }
