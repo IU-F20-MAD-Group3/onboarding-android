@@ -1,4 +1,4 @@
-package university.innopolis.madgroup3.onboarding.models
+package university.innopolis.madgroup3.onboarding.data.models
 
 data class Checklist(
         val id: Int,

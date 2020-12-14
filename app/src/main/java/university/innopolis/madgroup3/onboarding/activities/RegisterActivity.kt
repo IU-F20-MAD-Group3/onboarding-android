@@ -1,7 +1,7 @@
 package university.innopolis.madgroup3.onboarding.activities
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import university.innopolis.madgroup3.onboarding.R
 
 class RegisterActivity : AppCompatActivity() {
