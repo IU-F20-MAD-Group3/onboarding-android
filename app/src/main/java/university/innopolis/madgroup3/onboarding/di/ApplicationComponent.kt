@@ -4,6 +4,7 @@ import dagger.Component
 import university.innopolis.madgroup3.onboarding.activities.CaptionActivity
 import university.innopolis.madgroup3.onboarding.activities.LoginActivity
 import university.innopolis.madgroup3.onboarding.activities.MainActivity
+import university.innopolis.madgroup3.onboarding.fragments.ChecklistsFragment
 import university.innopolis.madgroup3.onboarding.fragments.NewsFragment
 import javax.inject.Singleton
 
@@ -23,5 +24,6 @@ interface ApplicationComponent {
     fun inject(activity: CaptionActivity)
     fun inject(activity: LoginActivity)
     fun inject(activity: MainActivity)
+    fun inject(fragment: ChecklistsFragment)
     fun inject(fragment: NewsFragment)
 }
