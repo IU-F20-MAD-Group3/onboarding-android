@@ -46,6 +46,17 @@ class NewsFragment : Fragment() {
         } else {
             // TODO: handle null news response
         }
+
+        fragment_news_swipe.setOnRefreshListener {
+            fragment_news_swipe.isRefreshing = true
+            val newNews = newsRepository.getAllNews()
+            if (newNews != null) {
+                (fragment_news_recycler.adapter as NewsItemAdapter).setNewsList(newNews)
+            } else {
+                // TODO: handle null news response
+            }
+            fragment_news_swipe.isRefreshing = false
+        }
     }
 
     companion object {
