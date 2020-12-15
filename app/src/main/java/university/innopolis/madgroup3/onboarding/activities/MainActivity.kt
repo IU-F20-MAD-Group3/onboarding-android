@@ -1,5 +1,6 @@
 package university.innopolis.madgroup3.onboarding.activities
 
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -15,15 +16,20 @@ import university.innopolis.madgroup3.onboarding.fragments.ChecklistsFragment
 import university.innopolis.madgroup3.onboarding.fragments.NewsFragment
 import university.innopolis.madgroup3.onboarding.fragments.TasksFragment
 import javax.inject.Inject
+import javax.inject.Named
 
 class MainActivity : AppCompatActivity() {
 
     @Inject
     lateinit var tokenRepository: TokenRepository
 
-    private lateinit var mTasksFragment: TasksFragment
-    private lateinit var mChecklistsFragment: ChecklistsFragment
-    private lateinit var mNewsFragment: NewsFragment
+    @Inject
+    @Named("secure")
+    lateinit var secureSharedPreferences: SharedPreferences
+
+    lateinit var mTasksFragment: TasksFragment
+    lateinit var mChecklistsFragment: ChecklistsFragment
+    lateinit var mNewsFragment: NewsFragment
 
     private val mOnNavigationItemSelectedListener =
         BottomNavigationView.OnNavigationItemSelectedListener { item ->
@@ -47,7 +53,7 @@ class MainActivity : AppCompatActivity() {
             false
         }
 
-    private fun inflateFragment(fragment: Fragment) {
+    fun inflateFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction().apply {
             replace(R.id.main_container, fragment)
             commit()
@@ -55,7 +61,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun bind() {
-        mTasksFragment = TasksFragment.newInstance()
+        val currentChecklistId = secureSharedPreferences.getInt("CURRENT_CHECKLIST", -1)
+
+        mTasksFragment =
+            TasksFragment.newInstance(if (currentChecklistId != -1) currentChecklistId else null)
         mChecklistsFragment = ChecklistsFragment.newInstance()
         mNewsFragment = NewsFragment.newInstance()
     }
