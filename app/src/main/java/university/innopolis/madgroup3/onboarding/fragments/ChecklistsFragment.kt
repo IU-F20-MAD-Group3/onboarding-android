@@ -48,23 +48,27 @@ class ChecklistsFragment : Fragment(), ChecklistsItemAdapter.OnItemClickListener
         (fragment_checklists_recycler.adapter as ChecklistsItemAdapter).setOnItemClickListener(this)
 
         val checklists = checklistRepository.getAllChecklists()
-        if (checklists != null) {
+        if (!checklists.isNullOrEmpty()) {
             (fragment_checklists_recycler.adapter as ChecklistsItemAdapter).setChecklistsList(
                 checklists
             )
+            toggleContentVisibility(true)
         } else {
+            toggleContentVisibility(false)
             showToast()
         }
 
         fragment_checklists_swipe.setOnRefreshListener {
             fragment_checklists_swipe.isRefreshing = true
             val newChecklists = checklistRepository.getAllChecklists()
-            if (newChecklists != null) {
+            if (!newChecklists.isNullOrEmpty()) {
                 (fragment_checklists_recycler.adapter as ChecklistsItemAdapter).setChecklistsList(
                     newChecklists
                 )
+                toggleContentVisibility(true)
             } else {
                 showToast()
+                toggleContentVisibility(false)
             }
             fragment_checklists_swipe.isRefreshing = false
         }
@@ -77,6 +81,11 @@ class ChecklistsFragment : Fragment(), ChecklistsItemAdapter.OnItemClickListener
             message,
             Toast.LENGTH_SHORT,
         ).show()
+    }
+
+    private fun toggleContentVisibility(visible: Boolean) {
+        fragment_checklists_recycler.visibility = if (visible) View.VISIBLE else View.GONE
+        fragment_checklists_empty.visibility = if (!visible) View.VISIBLE else View.GONE
     }
 
     companion object {
