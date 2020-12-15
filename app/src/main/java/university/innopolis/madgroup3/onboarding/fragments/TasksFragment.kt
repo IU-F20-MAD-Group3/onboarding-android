@@ -11,6 +11,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_tasks.*
 import university.innopolis.madgroup3.onboarding.OnboardingApplication
 import university.innopolis.madgroup3.onboarding.R
+import university.innopolis.madgroup3.onboarding.activities.MainActivity
 import university.innopolis.madgroup3.onboarding.adapters.TasksItemAdapter
 import university.innopolis.madgroup3.onboarding.data.models.Task
 import university.innopolis.madgroup3.onboarding.data.repositories.ChecklistRepository
@@ -47,7 +48,8 @@ class TasksFragment : Fragment(), TasksItemAdapter.OnItemClickListener {
         super.onViewCreated(view, savedInstanceState)
 
         if (checklistId == null) {
-            main_navigation.findViewById<View>(R.id.action_tasks).performClick()
+            (activity as MainActivity).main_navigation.findViewById<View>(R.id.action_checklists)
+                .performClick()
             return
         }
 
