@@ -3,7 +3,6 @@ package university.innopolis.madgroup3.onboarding.data.repositories
 import android.util.Log
 import io.reactivex.schedulers.Schedulers
 import university.innopolis.madgroup3.onboarding.data.models.Checklist
-import university.innopolis.madgroup3.onboarding.data.models.Task
 import university.innopolis.madgroup3.onboarding.db.dao.ChecklistDao
 import university.innopolis.madgroup3.onboarding.db.entities.ChecklistEntity
 import university.innopolis.madgroup3.onboarding.network.responses.ResponseWrapper
@@ -37,9 +36,38 @@ class ChecklistRepository @Inject constructor(
         return checklistsResponse.response
     }
 
+    fun getChecklist(id: Int): Checklist? {
+        val checklistResponse = dataService.getChecklist(id)
+            .subscribeOn(Schedulers.io())
+            .map {
+                // Cache checklist in the database
+                insertChecklistInDb(it)  // TODO: wrap into a coroutine
+                ResponseWrapper(it, null)
+            }
+            .onErrorReturn {
+                Log.e("ChecklistsRepository", it.message ?: "")
+                // If failed loading checklist, retrieve it from the database
+                val checklist = fetchChecklistFromDb(id)
+                ResponseWrapper(checklist, it)
+            }
+            .blockingGet()
+
+        return checklistResponse.response
+    }
+
+    private fun insertChecklistInDb(checklist: Checklist) {
+        val checklistEntity = mapChecklistToEntity(checklist)
+        checklistDao.insert(checklistEntity)
+    }
+
+    private fun fetchChecklistFromDb(id: Int): Checklist {
+        val checklistEntity = checklistDao.getById(id)
+        return mapEntityToChecklist(checklistEntity)
+    }
+
     private fun insertMultipleChecklistsInDb(checklists: List<Checklist>) {
         val checklistEntities = checklists.map { mapChecklistToEntity(it) }
-        checklistDao.insertMultiple(*checklistEntities.toTypedArray())
+        checklistDao.insert(*checklistEntities.toTypedArray())
     }
 
     private fun fetchAllChecklistsFromDb(): List<Checklist> {
@@ -60,30 +88,4 @@ class ChecklistRepository @Inject constructor(
             name = entity.name,
             description = entity.description,
         )
-
-    fun getChecklist(id: Int): Checklist? {
-        val checklistResponse = dataService.getChecklist(id)
-            .subscribeOn(Schedulers.io())
-            .map { ResponseWrapper(it, null) }
-            .onErrorReturn {
-                Log.e("ChecklistsRepository", it.message ?: "")
-                ResponseWrapper(null, it)
-            }
-            .blockingGet()
-
-        return checklistResponse.response
-    }
-
-    fun getChecklistTokens(id: Int): List<Task>? {
-        val tokensResponse = dataService.getChecklistTasks(id)
-            .subscribeOn(Schedulers.io())
-            .map { ResponseWrapper(it, null) }
-            .onErrorReturn {
-                Log.e("ChecklistsRepository", it.message ?: "")
-                ResponseWrapper(null, it)
-            }
-            .blockingGet()
-
-        return tokensResponse.response
-    }
 }

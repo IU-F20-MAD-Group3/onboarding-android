@@ -9,12 +9,12 @@ interface ChecklistDao {
     @Query("SELECT * FROM checklists")
     fun getAll(): List<ChecklistEntity>
 
+    @Query("SELECT * FROM checklists WHERE id = :id")
+    fun getById(id: Int): ChecklistEntity
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertMultiple(vararg checklists: ChecklistEntity)
+    fun insert(vararg checklists: ChecklistEntity)
 
     @Delete
-    fun delete(checklist: ChecklistEntity)
-
-    @Delete
-    fun deleteMultiple(vararg checklists: ChecklistEntity)
+    fun delete(vararg checklists: ChecklistEntity)
 }
