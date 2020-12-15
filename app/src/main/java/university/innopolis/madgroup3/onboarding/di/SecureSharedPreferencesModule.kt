@@ -6,7 +6,6 @@ import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
 import dagger.Module
 import dagger.Provides
-import university.innopolis.madgroup3.onboarding.activities.CaptionActivity
 import javax.inject.Named
 import javax.inject.Singleton
 

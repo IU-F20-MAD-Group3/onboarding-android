@@ -11,8 +11,11 @@ import javax.inject.Inject
 
 class CaptionActivity : AppCompatActivity() {
 
-    @Inject lateinit var tokenRepository: TokenRepository
-    @Inject lateinit var checklistRepository: ChecklistRepository
+    @Inject
+    lateinit var tokenRepository: TokenRepository
+
+    @Inject
+    lateinit var checklistRepository: ChecklistRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         (applicationContext as OnboardingApplication).appComponent.inject(this)

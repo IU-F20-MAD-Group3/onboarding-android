@@ -1,6 +1,5 @@
 package university.innopolis.madgroup3.onboarding.fragments
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,15 +10,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_news.*
 import university.innopolis.madgroup3.onboarding.OnboardingApplication
 import university.innopolis.madgroup3.onboarding.R
-import university.innopolis.madgroup3.onboarding.activities.MainActivity
 import university.innopolis.madgroup3.onboarding.adapters.NewsItemAdapter
-import university.innopolis.madgroup3.onboarding.data.repositories.ChecklistRepository
 import university.innopolis.madgroup3.onboarding.data.repositories.NewsRepository
 import javax.inject.Inject
 
 class NewsFragment : Fragment() {
 
-    @Inject lateinit var newsRepository: NewsRepository
+    @Inject
+    lateinit var newsRepository: NewsRepository
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
