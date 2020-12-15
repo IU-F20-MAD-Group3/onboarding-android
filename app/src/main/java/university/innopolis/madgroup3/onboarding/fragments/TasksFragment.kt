@@ -61,7 +61,7 @@ class TasksFragment : Fragment(), TasksItemAdapter.OnItemClickListener {
 
         (fragment_tasks_recycler.adapter as TasksItemAdapter).setOnItemClickListener(this)
 
-        val tasks = checklistRepository.getChecklistTokens(checklistId!!)
+        val tasks = taskRepository.getTasksByChecklistId(checklistId!!)
         if (tasks != null) {
             (fragment_tasks_recycler.adapter as TasksItemAdapter).setTasksList(
                 tasks
@@ -72,7 +72,7 @@ class TasksFragment : Fragment(), TasksItemAdapter.OnItemClickListener {
 
         fragment_tasks_swipe.setOnRefreshListener {
             fragment_tasks_swipe.isRefreshing = true
-            val newTasks = checklistRepository.getChecklistTokens(checklistId!!)
+            val newTasks = taskRepository.getTasksByChecklistId(checklistId!!)
             if (!newTasks.isNullOrEmpty()) {
                 (fragment_tasks_recycler.adapter as TasksItemAdapter).setTasksList(
                     newTasks
