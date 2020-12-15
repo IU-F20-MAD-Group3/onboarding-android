@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_tasks.*
 import university.innopolis.madgroup3.onboarding.OnboardingApplication
 import university.innopolis.madgroup3.onboarding.R
@@ -45,7 +46,10 @@ class TasksFragment : Fragment(), TasksItemAdapter.OnItemClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        if (checklistId == null) return
+        if (checklistId == null) {
+            main_navigation.findViewById<View>(R.id.action_tasks).performClick()
+            return
+        }
 
         val checklist = checklistRepository.getChecklist(checklistId!!)
         fragment_tasks_title.text = checklist?.name
