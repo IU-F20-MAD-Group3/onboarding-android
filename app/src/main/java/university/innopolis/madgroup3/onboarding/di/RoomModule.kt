@@ -6,6 +6,7 @@ import dagger.Module
 import dagger.Provides
 import university.innopolis.madgroup3.onboarding.db.AppDatabase
 import university.innopolis.madgroup3.onboarding.db.dao.ChecklistDao
+import university.innopolis.madgroup3.onboarding.db.dao.NewsDao
 import university.innopolis.madgroup3.onboarding.db.dao.TaskDao
 import javax.inject.Singleton
 
@@ -29,4 +30,7 @@ class RoomModule {
 
     @Provides
     fun provideTaskDao(db: AppDatabase): TaskDao = db.taskDao()
+
+    @Provides
+    fun provideNewsDao(db: AppDatabase): NewsDao = db.newsDao()
 }

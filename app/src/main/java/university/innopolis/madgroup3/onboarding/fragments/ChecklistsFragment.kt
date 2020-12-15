@@ -23,6 +23,7 @@ class ChecklistsFragment : Fragment() {
         // TODO: remove the following debugging code
         val checklistRepository = (activity as MainActivity).checklistRepository
         val taskRepository = (activity as MainActivity).taskRepository
+        val newsRepository = (activity as MainActivity).newsRepository
 
         val checklists = checklistRepository.getAllChecklists()
         if (checklists == null) {
@@ -44,6 +45,13 @@ class ChecklistsFragment : Fragment() {
             return
         }
         Log.i("ChecklistsFragment", tasks.toString())
+
+        val allNews = newsRepository.getAllNews()
+        if (allNews == null) {
+            Log.e("ChecklistsFragment", "Failed fetching news")
+            return
+        }
+        Log.i("ChecklistsFragment", allNews.toString())
     }
 
     companion object {
