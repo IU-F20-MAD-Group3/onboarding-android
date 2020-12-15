@@ -8,19 +8,11 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 import university.innopolis.madgroup3.onboarding.OnboardingApplication
 import university.innopolis.madgroup3.onboarding.R
-import university.innopolis.madgroup3.onboarding.data.repositories.ChecklistRepository
-import university.innopolis.madgroup3.onboarding.data.repositories.NewsRepository
-import university.innopolis.madgroup3.onboarding.data.repositories.TaskRepository
 import university.innopolis.madgroup3.onboarding.fragments.ChecklistsFragment
 import university.innopolis.madgroup3.onboarding.fragments.NewsFragment
 import university.innopolis.madgroup3.onboarding.fragments.TasksFragment
-import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
-
-    @Inject lateinit var checklistRepository: ChecklistRepository
-    @Inject lateinit var taskRepository: TaskRepository
-    @Inject lateinit var newsRepository: NewsRepository
 
     private lateinit var mTasksFragment: TasksFragment
     private lateinit var mChecklistsFragment: ChecklistsFragment
