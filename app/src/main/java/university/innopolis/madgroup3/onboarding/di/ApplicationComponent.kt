@@ -16,6 +16,7 @@ import javax.inject.Singleton
         ApplicationModule::class,
         NetworkModule::class,
         SecureSharedPreferencesModule::class,
+        RoomModule::class,
     ]
 )
 interface ApplicationComponent {
